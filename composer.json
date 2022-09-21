@@ -19,7 +19,8 @@
     "php-di/php-di": "^6.4",
     "slim/psr7": "^1.5",
     "slim/slim": "^4.10",
-    "twig/twig": "^3.4"
+    "twig/twig": "^3.4",
+    "vlucas/phpdotenv": "^5.4"
   },
   "autoload": {
     "psr-4": {
