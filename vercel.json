@@ -2,8 +2,7 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.5.2",
-      "excludeFiles": "games/**/*",
-      "excludeFiles": "board-games/**/*"
+      "excludeFiles": "{board-games,games}/**/*"
     }
   },
   "rewrites": [
