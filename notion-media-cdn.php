@@ -25,6 +25,8 @@ $app
 
         $filename = Uuid::uuid4() . '.' . pathinfo(parse_url($mediaUrl, PHP_URL_PATH), PATHINFO_EXTENSION);;
         file_put_contents(__DIR__ . '/' . $directory . '/' . $filename, $client->get($mediaUrl)->getBody()->getContents());
+
+        echo PHP_EOL . 'https://raw.githubusercontent.com/robiningelbrecht/notion-media-cdn/master/' . $directory . '/' . $filename . PHP_EOL;
     });
 
 $app->handle($_SERVER['argv']);
