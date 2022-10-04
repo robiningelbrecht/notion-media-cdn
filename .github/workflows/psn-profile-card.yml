@@ -1,0 +1,45 @@
+name: Notion media CDN
+on:
+  workflow_dispatch:
+    inputs:
+      media-url:
+        type: string
+        description: The URL of the media item to add to the CDN
+        required: true
+      directory:
+        type: choice
+        description: Directory to upload the file to
+        required: true
+        options:
+          - games
+          - cubing
+jobs:
+  upload-media:
+    name: Upload media
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/marketplace/actions/setup-php-action
+      - name: Setup PHP 8.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist
+
+      - name: Update cache
+        run: |
+          bin/notion-media-cdn ${{ github.event.inputs.directory }} ${{ github.event.inputs.media-url }}
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'robiningelbrecht'
+          git config --global user.email 'robiningelbrecht@users.noreply.github.com'
+          git add .
+          git status
+          git diff --staged --quiet || git commit -m"Added media to CDN"
+          git push
