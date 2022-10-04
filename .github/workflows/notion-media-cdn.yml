@@ -31,9 +31,9 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist
 
-      - name: Update cache
+      - name: Upload and rename file
         run: |
-          bin/notion-media-cdn ${{ github.event.inputs.directory }} ${{ github.event.inputs.media-url }}
+          bin/notion-media-cdn media:upload ${{ github.event.inputs.directory }} ${{ github.event.inputs.media-url }}
 
       - name: Commit and push changes
         run: |
